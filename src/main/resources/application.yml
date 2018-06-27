@@ -1,0 +1,23 @@
+server:
+  port: 8004
+
+
+spring:
+## 数据源配置
+  datasource:
+        url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+
+  data:
+   ## elasticsearch配置
+           elasticsearch:
+               repositories:
+                   enable=true: true
+               cluster-name: taojin-es
+               cluster-nodes: 192.168.1.163:9300,192.168.1.163:8300 #配置es节点信息，逗号分隔，如果没有指定，则启动ClientNode
