@@ -68,9 +68,9 @@ public class ElasticsearchController {
         
         
         Employee employee = employeeRepository.queryEmployeeById(id);
-        EsEmployee esEmployee = esEmployeeRepository.queryEmployeeById(id);
+        //EsEmployee esEmployee = esEmployeeRepository.queryEmployeeById(id);
         
-        return new ResponseEntity(ToStringBuilder.reflectionToString(employee) + "\n" + ToStringBuilder.reflectionToString(esEmployee), HttpStatus.OK);
+        return new ResponseEntity(ToStringBuilder.reflectionToString(employee) + "\n" + ToStringBuilder.reflectionToString(employee), HttpStatus.OK);
     }
     
     
@@ -92,7 +92,7 @@ public class ElasticsearchController {
         BeanMapper.copy(employee, esEmployee);
 
         //esEmployeeDao.insert(esEmployee);
-        esEmployeeRepository.save(esEmployee);
+        //esEmployeeRepository.save(esEmployee);
     
         EsUserInfo userInfo=new EsUserInfo();
         userInfo.setId(employee.getId());
