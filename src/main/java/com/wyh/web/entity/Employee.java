@@ -2,6 +2,7 @@ package com.wyh.web.entity;
 
 import com.wyh.web.base.IdAble;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="employee_info")
+@Document(indexName = "employee",type = "doc",refreshInterval = "0s")
 public class Employee  implements IdAble<String> {
     
     @Id

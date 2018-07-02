@@ -1,7 +1,9 @@
 package com.wyh.web.entity;
 
+import com.wyh.web.base.BaseEntity;
 import com.wyh.web.base.IdAble;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,14 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "user_info")
+
+@Document(indexName = "userinfo",type = "doc",refreshInterval = "0s")
 public class UserInfo implements IdAble<String> {
     
     @Id
-    @Column(length=32)
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid.hex")
     private String id;
     
     @Override

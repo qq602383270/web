@@ -1,15 +1,16 @@
 package com.wyh.web.es;
 
+import com.wyh.web.entity.UserInfo;
 import com.wyh.web.es.entity.EsEmployee;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectKey;
 
 @Mapper
-public interface EsEmployeeDao {
+public interface UserInfoDao {
     
-    @Insert("INSERT INTO employee_info(id,first_name,last_name,age,about,address) VALUES(#{id},#{firstName},#{lastName},#{age},#{about},#{address})")
+    @Insert("INSERT INTO user_info(id,username,password,realname) VALUES(#{id},#{username},#{password},#{realname})")
     @SelectKey(keyProperty = "id", resultType = String.class, before = true,
             statement = "select replace(uuid(), '-', '') as id from dual")
-    void insert(EsEmployee user);
+    void insert(UserInfo user);
 }

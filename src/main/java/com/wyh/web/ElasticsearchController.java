@@ -2,14 +2,12 @@ package com.wyh.web;
 
 import com.taojin.commons.utils.beans.BeanMapper;
 import com.wyh.web.entity.Employee;
-import com.wyh.web.es.EsEmployeeDao;
+import com.wyh.web.entity.UserInfo;
+import com.wyh.web.es.UserInfoDao;
 import com.wyh.web.es.entity.DetailOrderDocument;
 import com.wyh.web.es.entity.EsEmployee;
-import com.wyh.web.es.entity.EsUserInfo;
 import com.wyh.web.es.entity.OrderDocument;
 import com.wyh.web.es.repository.DetailOrderDocumentRepository;
-import com.wyh.web.es.repository.EsEmployeeRepository;
-import com.wyh.web.es.repository.EsUserInfoRepository;
 import com.wyh.web.repository.EmployeeRepository;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,18 +34,15 @@ public class ElasticsearchController {
     
     @Resource
     EmployeeRepository employeeRepository;
-    
-    @Resource
-    EsEmployeeRepository esEmployeeRepository;
-    
-    @Resource
-    EsUserInfoRepository esUserInfoRepository;
+//
+//    @Resource
+//    EsEmployeeRepository esEmployeeRepository;
     
     @Resource
     DetailOrderDocumentRepository detailOrderDocumentRepository;
     
     @Autowired(required=false)
-    EsEmployeeDao esEmployeeDao;
+    UserInfoDao userInfoDao;
     
     //单一查询
     @GetMapping("/es")
@@ -94,13 +89,13 @@ public class ElasticsearchController {
         //esEmployeeDao.insert(esEmployee);
         //esEmployeeRepository.save(esEmployee);
     
-        EsUserInfo userInfo=new EsUserInfo();
+        UserInfo userInfo=new UserInfo();
         userInfo.setId(employee.getId());
         userInfo.setPassword("123223");
         userInfo.setRealname("lastName");
         userInfo.setUsername("wyh");
-        
-        esUserInfoRepository.save(userInfo);
+    
+        userInfoDao.insert(userInfo);
         
         return new ResponseEntity(ToStringBuilder.reflectionToString(employee) + "\n" + ToStringBuilder.reflectionToString(esEmployee), HttpStatus.OK);
     }
